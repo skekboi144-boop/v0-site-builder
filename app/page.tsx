@@ -174,7 +174,7 @@ export default function Home() {
       <nav className="fixed top-0 w-full bg-slate-950/90 backdrop-blur-md border-b border-white/10 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <Image src="/logo.png" alt="L&L Contracting Group" width={40} height={40} className="object-contain" style={{ width: 'auto', height: 'auto' }} />
+            <Image src="/logo.png" alt="L&L Contracting Group" width={40} height={40} style={{ width: 40, height: 40 }} />
             <span className="font-bold text-white text-lg hidden sm:inline tracking-tight">L&L Contracting Group</span>
           </div>
           <div className="flex items-center gap-3">
@@ -491,7 +491,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
             <div>
               <div className="flex items-center gap-3 mb-4">
-                <Image src="/logo.png" alt="L&L Logo" width={40} height={40} className="object-contain" style={{ width: 'auto', height: 'auto' }} />
+                <Image src="/logo.png" alt="L&L Logo" width={40} height={40} style={{ width: 40, height: 40 }} />
                 <span className="font-bold text-white tracking-tight">L&L Contracting Group</span>
               </div>
               <p className="text-sm leading-relaxed">Built on Trust. Backed by Service.</p>
