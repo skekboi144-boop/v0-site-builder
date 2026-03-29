@@ -125,15 +125,46 @@ export default function Home() {
     service: '',
     message: '',
   })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<{ type: 'success' | 'error'; message: string } | null>(null)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target
     setFormData(prev => ({ ...prev, [name]: value }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setFormData({ name: '', email: '', phone: '', service: '', message: '' })
+    setIsSubmitting(true)
+    setSubmitStatus(null)
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to send estimate request')
+      }
+
+      setSubmitStatus({
+        type: 'success',
+        message: 'Your estimate request has been sent! We will get back to you within 24 hours.',
+      })
+      setFormData({ name: '', email: '', phone: '', service: '', message: '' })
+
+      // Clear success message after 5 seconds
+      setTimeout(() => setSubmitStatus(null), 5000)
+    } catch (error) {
+      setSubmitStatus({
+        type: 'error',
+        message: 'Failed to send your request. Please try again or contact us directly at LLcontractingnj@gmail.com.',
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -143,7 +174,7 @@ export default function Home() {
       <nav className="fixed top-0 w-full bg-slate-950/90 backdrop-blur-md border-b border-white/10 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <Image src="/logo.png" alt="L&L Contracting Group" width={40} height={40} className="object-contain" />
+            <Image src="/logo.png" alt="L&L Contracting Group" width={40} height={40} style={{ width: 40, height: 40 }} />
             <span className="font-bold text-white text-lg hidden sm:inline tracking-tight">L&L Contracting Group</span>
           </div>
           <div className="flex items-center gap-3">
@@ -411,9 +442,24 @@ export default function Home() {
                 />
               </div>
 
-              <Button type="submit" size="lg" className="w-full bg-blue-700 hover:bg-blue-800 text-white h-12 text-base font-semibold">
-                Request Free Estimate
+              <Button 
+                type="submit" 
+                size="lg" 
+                className="w-full bg-blue-700 hover:bg-blue-800 text-white h-12 text-base font-semibold disabled:opacity-70 disabled:cursor-not-allowed"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? 'Sending...' : 'Request Free Estimate'}
               </Button>
+
+              {submitStatus && (
+                <div className={`p-4 rounded-lg text-sm font-medium ${
+                  submitStatus.type === 'success'
+                    ? 'bg-green-50 text-green-800 border border-green-200'
+                    : 'bg-red-50 text-red-800 border border-red-200'
+                }`}>
+                  {submitStatus.message}
+                </div>
+              )}
 
               <p className="text-center text-sm text-slate-500 pt-4 border-t border-slate-100">
                 We respond within 24 hours. Email us at{' '}
@@ -445,7 +491,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
             <div>
               <div className="flex items-center gap-3 mb-4">
-                <Image src="/logo.png" alt="L&L Logo" width={40} height={40} className="object-contain" />
+                <Image src="/logo.png" alt="L&L Logo" width={40} height={40} style={{ width: 40, height: 40 }} />
                 <span className="font-bold text-white tracking-tight">L&L Contracting Group</span>
               </div>
               <p className="text-sm leading-relaxed">Built on Trust. Backed by Service.</p>
