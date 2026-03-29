@@ -1,29 +1,27 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server'
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
-    const { name, email, phone, service, message } = body;
+    const body = await request.json()
+    const { name, email, phone, service, message } = body
 
-    // Validate required fields
     if (!name || !email || !phone || !service || !message) {
       return NextResponse.json(
         { error: 'Missing required fields' },
         { status: 400 }
-      );
+      )
     }
 
-    const RESEND_API_KEY = process.env.RESEND_API_KEY;
-    
+    const RESEND_API_KEY = process.env.RESEND_API_KEY
+
     if (!RESEND_API_KEY) {
-      console.error('RESEND_API_KEY is not set');
+      console.error('RESEND_API_KEY is not set')
       return NextResponse.json(
         { error: 'Email service not configured' },
         { status: 500 }
-      );
+      )
     }
 
-    // Send email to business using fetch
     const businessEmailResponse = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
@@ -46,18 +44,17 @@ export async function POST(request: NextRequest) {
           <p><small>This request was submitted via the L&L Contracting Group website contact form.</small></p>
         `,
       }),
-    });
+    })
 
     if (!businessEmailResponse.ok) {
-      const errorData = await businessEmailResponse.json();
-      console.error('Resend API error:', errorData);
+      const errorData = await businessEmailResponse.json()
+      console.error('Resend API error:', errorData)
       return NextResponse.json(
         { error: 'Failed to send email' },
         { status: 500 }
-      );
+      )
     }
 
-    // Send confirmation email to user
     await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
@@ -71,7 +68,7 @@ export async function POST(request: NextRequest) {
         html: `
           <h2>Thank You, ${name}!</h2>
           <p>We received your estimate request for ${service}.</p>
-          <p>Our team will review your information and get back to you within 24 hours at this email address or by phone.</p>
+          <p>Our team will review your information and get back to you within 24 hours.</p>
           <p><strong>Your Submission Details:</strong></p>
           <p>Phone: ${phone}</p>
           <p>Service: ${service}</p>
@@ -80,17 +77,17 @@ export async function POST(request: NextRequest) {
           <strong>Built on Trust. Backed by Service.</strong></p>
         `,
       }),
-    });
+    })
 
     return NextResponse.json(
       { success: true, message: 'Estimate request sent successfully' },
       { status: 200 }
-    );
+    )
   } catch (error) {
-    console.error('Error sending email:', error);
+    console.error('Error sending email:', error)
     return NextResponse.json(
       { error: 'Failed to send estimate request' },
       { status: 500 }
-    );
+    )
   }
 }
