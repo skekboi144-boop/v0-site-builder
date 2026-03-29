@@ -31,8 +31,8 @@ export async function POST(request: NextRequest) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: 'Contact Form <onboarding@resend.dev>',
-        to: 'LLcontractingnj@gmail.com',
+        from: 'Contact Form <contact@llcontractingnj.com>',
+        to: 'llcontractingnj@gmail.com',
         subject: `New Estimate Request from ${name}`,
         html: `
           <h2>New Estimate Request</h2>
