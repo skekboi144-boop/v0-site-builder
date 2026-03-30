@@ -95,7 +95,7 @@ const SERVICES = [
       </svg>
     ),
     title: 'Landscaping',
-    desc: 'Enhance your property&apos;s curb appeal with our professional landscaping services.',
+    desc: 'Enhance your property's curb appeal with our professional landscaping services.',
   },
   {
     icon: (
@@ -442,9 +442,9 @@ export default function Home() {
                 />
               </div>
 
-              <Button 
-                type="submit" 
-                size="lg" 
+              <Button
+                type="submit"
+                size="lg"
                 className="w-full bg-blue-700 hover:bg-blue-800 text-white h-12 text-base font-semibold disabled:opacity-70 disabled:cursor-not-allowed"
                 disabled={isSubmitting}
               >
@@ -452,11 +452,10 @@ export default function Home() {
               </Button>
 
               {submitStatus && (
-                <div className={`p-4 rounded-lg text-sm font-medium ${
-                  submitStatus.type === 'success'
+                <div className={`p-4 rounded-lg text-sm font-medium ${submitStatus.type === 'success'
                     ? 'bg-green-50 text-green-800 border border-green-200'
                     : 'bg-red-50 text-red-800 border border-red-200'
-                }`}>
+                  }`}>
                   {submitStatus.message}
                 </div>
               )}
