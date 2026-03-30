@@ -95,7 +95,7 @@ const SERVICES = [
       </svg>
     ),
     title: 'Landscaping',
-    desc: 'Transform your outdoor space with professional landscaping design, lawn care, and hardscaping solutions.',
+    desc: 'Enhance your property&apos;s curb appeal with our professional landscaping services.',
   },
   {
     icon: (
@@ -174,7 +174,7 @@ export default function Home() {
       <nav className="fixed top-0 w-full bg-slate-950/90 backdrop-blur-md border-b border-white/10 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <Image src="/logo.png" alt="L&L Contracting Group" width={40} height={40} className="w-10 h-10" style={{ width: 'auto', height: 'auto' }} />
+            <Image src="/logo.png" alt="L&L Contracting Group" width={40} height={40} style={{ width: 40, height: 40 }} />
             <span className="font-bold text-white text-lg hidden sm:inline tracking-tight">L&L Contracting Group</span>
           </div>
           <div className="flex items-center gap-3">
@@ -314,7 +314,7 @@ export default function Home() {
             <div className="relative">
               <div className="absolute -inset-4 bg-gradient-to-br from-blue-600 to-red-600 rounded-2xl opacity-20 blur-xl" />
               <div className="relative bg-gradient-to-br from-slate-900 to-blue-900 rounded-2xl p-10 text-white flex flex-col items-center justify-center h-80 shadow-2xl">
-                <Image src="/logo.png" alt="L&L Logo" width={140} height={140} className="mb-5 drop-shadow-2xl" style={{ width: 'auto', height: 'auto' }} />
+                <Image src="/logo.png" alt="L&L Logo" width={140} height={140} className="mb-5 drop-shadow-2xl" />
                 <p className="text-center text-lg font-bold tracking-tight">L&L Contracting Group</p>
                 <p className="text-center text-sm text-slate-300 mt-2">Built on Trust. Backed by Service.</p>
               </div>
