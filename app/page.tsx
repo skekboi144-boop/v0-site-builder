@@ -95,7 +95,7 @@ const SERVICES = [
       </svg>
     ),
     title: 'Landscaping',
-    desc: 'Enhance your property&apos;s curb appeal with our professional landscaping services.',
+    desc: "Enhance your property's curb appeal with our professional landscaping services.",
   },
   {
     icon: (
