@@ -66,7 +66,7 @@ const ROOF_SERVICES = [
   },
   {
     title: 'Shingle Replacement',
-    desc: 'Professional replacement of damaged or missing shingles to restore your roof&apos;s integrity.',
+    desc: 'Professional replacement of damaged or missing shingles to restore your roof and its integrity.',
   },
   {
     title: 'Flashing Repair',
@@ -111,7 +111,7 @@ export default function RoofRepairsPage() {
       <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden pt-16">
         {/* Background */}
         <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950" />
-        
+
         {/* Hero content */}
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-24">
           <div
