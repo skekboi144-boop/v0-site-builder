@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useScrollAnimation } from '@/hooks/use-scroll-animation'
 
 function AnimatedSection({
@@ -273,8 +274,9 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-5">
-            {SERVICES.map((service, idx) => (
-              <AnimatedDiv key={idx} delay={idx * 80}>
+            {SERVICES.map((service, idx) => {
+              const isRoofRepairs = service.title === 'Roof Repairs'
+              const cardContent = (
                 <Card className="p-6 h-full hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-white border-slate-200 group cursor-pointer">
                   <div className="flex items-center justify-center w-14 h-14 rounded-xl bg-blue-50 text-blue-700 mb-4 group-hover:bg-blue-700 group-hover:text-white transition-colors duration-300">
                     {service.icon}
@@ -282,8 +284,20 @@ export default function Home() {
                   <h3 className="font-bold text-lg mb-2 text-slate-900">{service.title}</h3>
                   <p className="text-slate-500 text-sm leading-relaxed">{service.desc}</p>
                 </Card>
-              </AnimatedDiv>
-            ))}
+              )
+
+              return (
+                <AnimatedDiv key={idx} delay={idx * 80}>
+                  {isRoofRepairs ? (
+                    <Link href="/roof-repairs" className="block h-full">
+                      {cardContent}
+                    </Link>
+                  ) : (
+                    cardContent
+                  )}
+                </AnimatedDiv>
+              )
+            })}
           </div>
         </AnimatedDiv>
       </div>
